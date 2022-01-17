@@ -19,6 +19,7 @@ export const fetchNotifications = createAsyncThunk(
     const response = await client.get(
       `/fakeApi/notifications?since=${latestTimestamp}`
     );
+
     return response.data;
   }
 );
@@ -35,10 +36,17 @@ const notificationsSlice = createSlice({
   },
   extraReducers: {
     [fetchNotifications.fulfilled]: (state, action) => {
-      notificationsAdapter.upsertMany(state, action.payload);
+      const notificationsWithMetadata = action.payload.map((notification) => ({
+        ...notification,
+        read: false,
+        isNew: true,
+      }));
+
       Object.values(state.entities).forEach((notification) => {
         notification.isNew = !notification.read;
       });
+
+      notificationsAdapter.upsertMany(state, notificationsWithMetadata);
     },
   },
 });

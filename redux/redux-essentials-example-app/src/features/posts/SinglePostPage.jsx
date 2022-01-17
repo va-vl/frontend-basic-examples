@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 //
 import { useGetPostQuery } from '../api/apiSlice';
@@ -20,13 +19,12 @@ export const SinglePostPage = ({ match }) => {
     data: post,
     isFetching,
     isSuccess,
-    isError
   } = useGetPostQuery(postId);
 
   let content;
 
   if (isFetching) {
-    content = <Spinner text="Loading..." />
+    content = <Spinner text="Loading..." />;
   } else if (isSuccess) {
     content = (
       <section>
@@ -46,9 +44,5 @@ export const SinglePostPage = ({ match }) => {
     );
   }
 
-  return isError ? (
-    <PostNotFoundPage />
-  ) : (
-    <section>{content}</section>
-  );
+  return <section>{content}</section>;
 };

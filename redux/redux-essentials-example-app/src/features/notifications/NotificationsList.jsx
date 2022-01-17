@@ -1,17 +1,20 @@
+import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import classnames from 'classnames';
 //
 import { selectAllUsers } from '../users/usersSlice';
-import { selectAllNotifications, allNotificationsRead } from './notificationsSlice';
-import { useLayoutEffect } from 'react';
+import {
+  selectAllNotifications,
+  allNotificationsRead,
+} from './notificationsSlice';
 
 export const NotificationsList = () => {
   const notifications = useSelector(selectAllNotifications);
   const users = useSelector(selectAllUsers);
   const dispatch = useDispatch();
 
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     dispatch(allNotificationsRead());
   });
 
@@ -38,8 +41,10 @@ export const NotificationsList = () => {
     );
   });
 
-  return <section className='notificationsList'>
-    <h2>Notifications</h2>
-    {renderedNotifications}
-  </section>
+  return (
+    <section className="notificationsList">
+      <h2>Notifications</h2>
+      {renderedNotifications}
+    </section>
+  );
 };
