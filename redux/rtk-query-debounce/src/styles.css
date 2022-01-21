@@ -1,0 +1,14 @@
+.App {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.text-hint {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.search-input {
+  display: block;
+  margin: 16px 0;
+}
